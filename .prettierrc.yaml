@@ -1,0 +1,4 @@
+semi: true
+singleQuote: false
+proseWrap: "preserve"
+tabWidth: 2

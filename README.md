@@ -10,14 +10,14 @@ This is the repo of [LogMyPet]().
 
 **Screenshot**:
 
-**Instructions to run/build**:
+**Instructions to build/run**:
 
 1. Git clone this project to your local (run `git clone git@github.com:YixiangXie-NEU/LogMyPet.git` in your terminal)
 1. Navigate to the root directory (run `cd LogMyPet` in your terminal)
-1. Install the required dependencies (run `yarn` in your terminal)
+1. Install all the required dependencies (run `yarn install:all` in your terminal)
+1. Build the frontend project (run `yarn build` in your terminal)
 1. Run the project locally (run `yarn start` in your terminal)
 1. Access the page in `http://localhost:3000`
-1. To build the project locally, run `yarn build` in your terminal
 
 **Design document**: [link](https://docs.google.com/document/d/16rWFdmIpdwGWzglFKyjteMEkSaJHJNAs5pNcU7eDYj0/edit?usp=sharing)
 

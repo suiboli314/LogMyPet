@@ -1,6 +1,7 @@
 import { MongoClient } from "mongodb";
+import config from "../config.js";
 
-const mongoURL = process.env.MONGO_URL || "mongodb://localhost:27017";
+const mongoURL = config.MONGO_URL || "mongodb://localhost:27017";
 const DB_NAME = "logMyPetDB";
 // const USER_COLLECTION_NAME = "users";
 const PET_COLLECTION_NAME = "pets";

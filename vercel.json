@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/routes/(.*)",
-      "destination": "/api"
+      "destination": "/"
     }
   ]
 }

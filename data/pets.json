@@ -1,0 +1,12 @@
+[{
+  "type": "cat",
+  "breed": "American Shorthair",
+  "name": "meow",
+  "gender": "male",
+  "birthday": {
+    "$date": {
+      "$numberLong": "1571641200000"
+    }
+  },
+  "personality": "shy"
+}]

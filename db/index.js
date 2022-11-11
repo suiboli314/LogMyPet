@@ -1,28 +1,29 @@
 import { MongoClient } from "mongodb";
 
 const mongoURL = process.env.MONGO_URL || "mongodb://localhost:27017";
-const DB_NAME = "earthquakesDB";
-const COLLECTION_NAME = "quakes";
+const DB_NAME = "logMyPetDB";
+// const USER_COLLECTION_NAME = "users";
+const PET_COLLECTION_NAME = "pets";
 const PAGE_SIZE = 20;
 
-const getQuakes = async function (query = {}, page = 0) {
+const getPets = async function (page = 0) {
   let client;
 
   try {
     client = new MongoClient(mongoURL);
-    const quakesCol = client.db(DB_NAME).collection(COLLECTION_NAME);
+    const petsCol = client.db(DB_NAME).collection(PET_COLLECTION_NAME);
 
-    return await quakesCol
-      .find(query)
+    return await petsCol
+      .find({})
       .skip(PAGE_SIZE * page)
       .limit(PAGE_SIZE)
       .toArray();
   } finally {
-    console.log("getQuakes: Closing db connection");
+    console.log("getPets: Closing db connection");
     client.close();
   }
 };
 
 export default {
-  getQuakes,
+  getPets,
 };

@@ -8,6 +8,7 @@
   "author": "Yixiang Xie & Ting Tang",
   "license": "MIT",
   "scripts": {
+    "init:db": "mongoimport -d logMyPetDB -c pets --jsonArray --file ./data/pets.json",
     "install:all": "yarn && cd frontend && yarn",
     "build": "cd frontend && yarn clean && yarn build",
     "start": "yarn build && nodemon app.js"
@@ -15,6 +16,7 @@
   "devDependencies": {
     "eslint": "^8.27.0",
     "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-react": "^7.31.10",
     "prettier": "^2.7.1"
   },
   "dependencies": {

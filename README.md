@@ -12,11 +12,12 @@ This is the repo of [LogMyPet]().
 
 **Instructions to build/run**:
 
+1. Before running the project locally, you should have MongoDB installed and running on you device. For how to install and run MongoDB on you device, check this [link](https://www.mongodb.com/docs/manual/administration/install-community/).
 1. Git clone this project to your local (run `git clone git@github.com:YixiangXie-NEU/LogMyPet.git` in your terminal)
 1. Navigate to the root directory (run `cd LogMyPet` in your terminal)
+1. Init the database with our data (run `yarn init:db` in your terminal)
 1. Install all the required dependencies (run `yarn install:all` in your terminal)
-1. Build the frontend project (run `yarn build` in your terminal)
-1. Run the project locally (run `yarn start` in your terminal)
+1. Build and run the project locally (run `yarn start` in your terminal)
 1. Access the page in `http://localhost:3000`
 
 **Design document**: [link](https://docs.google.com/document/d/16rWFdmIpdwGWzglFKyjteMEkSaJHJNAs5pNcU7eDYj0/edit?usp=sharing)

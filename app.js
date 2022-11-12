@@ -3,8 +3,8 @@ import morgan from "morgan";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
 
-import indexRouter from "./api/index.js";
 import config from "./config.js";
+import indexRouter from "./api/index.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

@@ -5,6 +5,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "clean": "rm -rf build"
   },

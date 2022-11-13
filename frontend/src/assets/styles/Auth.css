@@ -1,7 +1,7 @@
 .auth-right-bg {
   background-color: #323EF7;
   color: white;
-  font-size: 38;
+  font-size: 38px;
   font-weight: 500;
   width: 50vw;
 }
@@ -9,4 +9,19 @@
 .auth-left-bg {
   color: white;
   width: 50vw;
+}
+
+.auth-right-headline {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  margin: 4.75vw 0 0 3vw;
+  line-height: 32px;
+}
+
+.auth-right-pic {
+  width: 43vw;
+  position: absolute;
+  bottom: 0;
+  right: 12vw;
 }

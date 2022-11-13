@@ -1,6 +1,6 @@
 import React from "react";
 
-import RightPanelProfile from "../components/RightPanelProfile";
+import RightPanelProfile from "./RightPanelProfile";
 
 import "../assets/styles/Colors.css";
 import "../assets/styles/RightPanel.css";

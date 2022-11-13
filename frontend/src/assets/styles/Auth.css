@@ -1,0 +1,12 @@
+.auth-right-bg {
+  background-color: #323EF7;
+  color: white;
+  font-size: 38;
+  font-weight: 500;
+  width: 50vw;
+}
+
+.auth-left-bg {
+  color: white;
+  width: 50vw;
+}

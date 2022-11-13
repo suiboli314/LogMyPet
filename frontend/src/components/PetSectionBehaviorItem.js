@@ -1,0 +1,21 @@
+import React from "react";
+import UilAngleRight from "@iconscout/react-unicons/icons/uil-angle-right-b";
+
+import "../assets/styles/Buttons.css";
+import "../assets/styles/Colors.css";
+import "../assets/styles/PetSectionBehaviorItem.css";
+
+function PetSectionBehaviorItem() {
+  return (
+    <button className="col-11 d-inline-flex align-items-center large-button background-purple">
+      <div className="pet-section-behavior-item-pic"></div>
+      <div className="d-flex flex-column align-items-start">
+        <span className="pet-section-behavior-item-title">Brush teeth</span>
+        <span>Nov, 10th</span>
+      </div>
+      <UilAngleRight className="right-icon" size="20" />
+    </button>
+  );
+}
+
+export default PetSectionBehaviorItem;

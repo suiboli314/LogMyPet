@@ -4,8 +4,8 @@ import UilPlus from "@iconscout/react-unicons/icons/uil-plus";
 import LogSectionTitle from "./LogSectionTitle";
 import LogSectionItem from "./LogSectionItem";
 
-import "../../assets/styles/LogSection.css";
 import "../../assets/styles/Buttons.css";
+import "../../assets/styles/LogSection.css";
 
 function LogSection() {
   return (
@@ -17,7 +17,7 @@ function LogSection() {
         </button>
       </div>
       <LogSectionTitle />
-      <div className="d-flex flex-column log-section-items">
+      <div className="d-flex flex-column position-relative log-section-items">
         <LogSectionItem />
         <LogSectionItem />
         <LogSectionItem />

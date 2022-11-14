@@ -1,4 +1,4 @@
-.pet-section-profile {
+.pet-section-content {
   height: 256px;
   border-radius: 16px;
   padding: 32px 56px;
@@ -15,4 +15,14 @@
   font-weight: 400;
   line-height: 38px;
   margin-bottom: 4px;
+}
+
+@media (max-width: 1200px) {
+  .pet-section-profile {
+    margin-bottom: 32px;
+  }
+
+  .pet-section-content {
+    padding: 32px 120px;
+  }
 }

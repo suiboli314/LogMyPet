@@ -8,7 +8,7 @@ function PetSection() {
   return (
     <div className="d-flex flex-column">
       <PetSectionHeader />
-      <div className="row justify-content-between">
+      <div className="d-flex flex-xl-row flex-column justify-content-between">
         <PetSectionProfile />
         <PetSectionBehavior />
       </div>

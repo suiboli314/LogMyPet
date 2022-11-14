@@ -9,7 +9,7 @@ function PetSectionProfile() {
   return (
     <div
       id="carouselExampleDark"
-      className="carousel carousel-dark slide col-6"
+      className="carousel carousel-dark slide col-12 col-xl-6 pet-section-profile"
       data-bs-ride="true"
     >
       <div className="carousel-indicators">
@@ -25,12 +25,14 @@ function PetSectionProfile() {
       <div className="carousel-inner">
         <div className="carousel-item active">
           {/* profile starts here */}
-          <div className="d-flex flex-column background-purple-light pet-section-profile">
-            <span className="pet-section-title">Lilca profile</span>
-            <span className="pet-section-description">
-              He arrived home on November 1st, 2021
-            </span>
-            <PetProfile />
+          <div className="d-flex justify-content-center background-purple-light pet-section-content">
+            <div className="d-flex flex-column">
+              <span className="pet-section-title">Lilca profile</span>
+              <span className="pet-section-description">
+                He arrived home on November 1st, 2021
+              </span>
+              <PetProfile />
+            </div>
           </div>
           {/* profile ends here */}
         </div>

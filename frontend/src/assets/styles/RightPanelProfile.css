@@ -1,22 +1,26 @@
+.right-pane-profile {
+  height: 50%;
+}
+
 .right-pane-title {
   font-size: 26px;
   font-weight: 600;
   line-height: 38px;
-  margin-top: 8vh;
+  margin-top: 56px;
 }
 
 .right-pane-profile-pic {
   height: 100px;
   width: 100px;
   border-radius: 50px;
-  margin: 4vh 0;
+  margin: 32px 0;
 }
 
 .right-pane-user-name {
   font-size: 24px;
   font-weight: 500;
   line-height: 38px;
-  margin-bottom: 3vh;
+  margin-bottom: 24px;
 }
 
 .right-pane-edit-profile-button {

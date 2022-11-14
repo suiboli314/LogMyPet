@@ -1,3 +1,22 @@
+.right-panel {
+  min-height: 720px;
+}
+
+.right-panel-image-section {
+  height: 50%;
+}
+
 #right-panel-illustration {
-  width: stretch;
+  height: 100%;
+  max-width: 25vw;
+  max-height: 100%;
+  margin-left: auto;
+  margin-top: auto;
+}
+
+@media (max-width: 1200px) {
+  #right-panel-illustration {
+    width: 100%;
+    height: auto;
+  }
 }

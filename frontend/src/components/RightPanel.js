@@ -8,13 +8,13 @@ import rightPanelIllustration from "../assets/images/right-panel-illustration.pn
 
 function RightPanel() {
   return (
-    <div className="col-3 p-0 d-flex flex-column justify-content-between background-purple">
+    <div className="col-3 p-0 d-flex flex-column justify-content-between background-purple-light right-panel">
       <RightPanelProfile />
-      <div>
+      <div className="d-flex right-panel-image-section">
         <img
           id="right-panel-illustration"
           src={rightPanelIllustration}
-          alt="An illustration of a woman and a dog."
+          alt="An illustration of a person and a dog."
         />
       </div>
     </div>

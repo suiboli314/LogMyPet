@@ -7,6 +7,7 @@
   "repository": "git@github.com:YixiangXie-NEU/LogMyPet.git",
   "author": "Yixiang Xie & Ting Tang",
   "license": "MIT",
+  "proxy": "http://localhost:3000",
   "scripts": {
     "init:db": "mongoimport -d logMyPetDB -c pets --jsonArray --file ./data/pets.json",
     "install:all": "yarn && cd frontend && yarn",

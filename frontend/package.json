@@ -4,6 +4,7 @@
   "description": "The frontend for LogMyPet.",
   "main": "index.js",
   "license": "MIT",
+  "proxy": "http://localhost:3000",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

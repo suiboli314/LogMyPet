@@ -2,13 +2,21 @@
   background-color: #323EF7;
   color: white;
   font-size: 38px;
-  font-weight: 500;
-  width: 50vw;
+  font-weight: 600;
+  width: 50%;
 }
 
 .auth-left-bg {
-  color: white;
-  width: 50vw;
+  width: 50%;
+}
+
+.auth-left-container {
+  width: 20vw;
+}
+
+.auth-text {
+  margin: 24px 0;
+  font-size: 14px;
 }
 
 .auth-right-headline {
@@ -16,7 +24,7 @@
   flex-direction: column;
   justify-content: left;
   margin: 4.75vw 0 0 3vw;
-  line-height: 32px;
+  line-height: 36px;
 }
 
 .auth-right-pic {
@@ -24,4 +32,18 @@
   position: absolute;
   bottom: 0;
   right: 12vw;
+}
+
+.auth-btn {
+  width: 100%;
+  margin-top: 24px;
+  color: white;
+  background-color: #323EF7;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 0;
+}
+
+.auth-btn:hover {
+  background-color: #003DA5;
 }

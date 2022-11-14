@@ -64,6 +64,19 @@ const AuthForm = ({ content }) => {
     //     console.log(0, res);
     //   });
     // }
+
+    // fetch("/api/signup", {
+    //   method: "POST",
+    //   body: JSON.stringify({
+    //     username: enteredName,
+    //     password: enteredPassword,
+    //   }),
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // }).then((res) => {
+    //   console.log(0, res);
+    // });
   };
 
   return (

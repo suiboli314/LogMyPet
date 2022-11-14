@@ -22,12 +22,16 @@ This is the repo of [LogMyPet]().
 
 **Design document**: [link](https://docs.google.com/document/d/16rWFdmIpdwGWzglFKyjteMEkSaJHJNAs5pNcU7eDYj0/edit?usp=sharing)
 
-**Design mockup**: [link]()
+**Design mockup**: [link](https://www.figma.com/file/kyL3RojSAam6b4RxOKTzTF/PetHabit?node-id=0%3A1)
 
 **Introduction slides**: [link]()
 
 **Demo video**: [link]()
 
-**Technical requirements**: React with hooks, Node, Express, Mongo
+**Technical requirements**: React with hooks, Bootstrap, Node, Express, Mongo
 
 **Favicon source**: [favicon.io](https://favicon.io/favicon-generator/)
+
+**Font source**: [Google Fonts](https://fonts.google.com)
+
+**Icon source**: [IconScout](https://iconscout.com)

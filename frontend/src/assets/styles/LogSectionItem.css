@@ -1,0 +1,24 @@
+.login-section-item {
+  padding: 12px 32px;
+  border-radius: 5px;
+}
+
+.login-section-item + .login-section-item {
+  margin-top: 16px;
+}
+
+.log-section-item-pic {
+  width: 32px;
+  height: 32px;
+  border-radius: 5px;
+  margin-right: 20px;
+}
+
+.log-section-item-title {
+  font-weight: 500;
+}
+
+.log-section-item-anchor {
+  margin-left: auto;
+  cursor: pointer;
+}

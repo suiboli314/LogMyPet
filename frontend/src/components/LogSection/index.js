@@ -1,0 +1,33 @@
+import React from "react";
+import UilPlus from "@iconscout/react-unicons/icons/uil-plus";
+
+import LogSectionTitle from "./LogSectionTitle";
+import LogSectionItem from "./LogSectionItem";
+
+import "../../assets/styles/LogSection.css";
+import "../../assets/styles/Buttons.css";
+
+function LogSection() {
+  return (
+    <div className="d-flex flex-column log-section">
+      <div className="d-flex justify-content-end">
+        <button className="d-inline-flex align-items-center small-button log-section-add-record-button orange-solid">
+          <UilPlus className="plus-icon" size="20" />
+          Add record
+        </button>
+      </div>
+      <LogSectionTitle />
+      <div className="d-flex flex-column log-section-items">
+        <LogSectionItem />
+        <LogSectionItem />
+        <LogSectionItem />
+        <LogSectionItem />
+        <LogSectionItem />
+        <LogSectionItem />
+        <LogSectionItem />
+      </div>
+    </div>
+  );
+}
+
+export default LogSection;

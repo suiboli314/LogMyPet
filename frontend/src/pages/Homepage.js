@@ -5,7 +5,7 @@ import RightPanel from "../components/RightPanel";
 
 function Homepage() {
   return (
-    <div className="container-fluid vh-100">
+    <div className="container-fluid vh-100 p-0">
       <div className="d-flex h-100">
         <LeftPanel />
         <RightPanel />

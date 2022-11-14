@@ -1,8 +1,8 @@
 import React from "react";
 import UilPlus from "@iconscout/react-unicons/icons/uil-plus";
 
-import "../assets/styles/PetSectionHeader.css";
-import "../assets/styles/Buttons.css";
+import "../../assets/styles/PetSectionHeader.css";
+import "../../assets/styles/Buttons.css";
 
 function PetSectionHeader() {
   return (
@@ -12,7 +12,7 @@ function PetSectionHeader() {
         <span>Welcome & let’s record some behaviors today</span>
       </div>
       <div className="d-flex align-items-center">
-        <button className="d-inline-flex align-items-center small-button pet-section-add-pet-button">
+        <button className="d-inline-flex align-items-center small-button pet-section-add-pet-button orange-solid">
           <UilPlus className="plus-icon" size="20" />
           Add pets
         </button>

@@ -6,12 +6,11 @@ import { useState, useRef } from "react";
 const AuthForm = ({ content }) => {
   const nameInputRef = useRef();
   const passwordInputRef = useRef();
+  // const [isLogin, setIsLogin] = useState(false);
   const [isAuthCorrect, setIsAuthCorrect] = useState(true);
   const [errAlert, setErrAlert] = useState("");
 
   const submitHandler = (event) => {
-    
-
     event.preventDefault();
 
     const enteredName = nameInputRef.current.value;
@@ -24,18 +23,47 @@ const AuthForm = ({ content }) => {
       setErrAlert("Field can't be empty");
     }
 
-    // fetch("/api/signup", {
-    //   method: "POST",
-    //   body: JSON.stringify({
-    //     username: enteredName,
-    //     password: enteredPassword,
-    //   }),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // }).then((res) => {
-    //   console.log(0, res);
-    // });
+    let BASE_URL;
+
+    if (content.page == "login") {
+      BASE_URL = "/api/login";
+    } else {
+      BASE_URL = "/api/signup";
+    }
+
+    fetch(BASE_URL, {
+      method: "POST",
+      body: JSON.stringify({
+        username: enteredName,
+        password: enteredPassword,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.ok) {
+        // do sth
+      } else {
+        alert(res.statusText);
+      }
+    });
+
+    // if (isLogin) {
+    //   // do sth
+    // } else {
+    //   fetch("/api/signup", {
+    //     method: "POST",
+    //     body: JSON.stringify({
+    //       username: enteredName,
+    //       password: enteredPassword,
+    //     }),
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   }).then((res) => {
+    //     console.log(0, res);
+    //   });
+    // }
   };
 
   return (
@@ -76,9 +104,6 @@ const AuthForm = ({ content }) => {
             <button type="button" className="auth-btn" onClick={submitHandler}>
               {content.btn}
             </button>
-            {/* <Button type="button" className="auth-btn" onClick={submitHandler}>
-              {content.btn}
-            </Button> */}
           </form>
         </div>
       </div>

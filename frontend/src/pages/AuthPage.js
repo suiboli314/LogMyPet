@@ -8,6 +8,7 @@ const AuthPage = () => {
       <div className="d-flex h-100">
         <AuthForm
           content={{
+            page: "login",
             title: "Sign in",
             description: "Don’t have an account？",
             extra: "Sign up",

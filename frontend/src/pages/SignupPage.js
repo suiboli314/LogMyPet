@@ -2,17 +2,17 @@ import React from "react";
 import AuthForm from "../components/Auth/AuthForm";
 import AuthRight from "../components/Auth/AuthRight";
 
-const AuthPage = () => {
+const SignupPage = () => {
   return (
     <div className="vh-100">
       <div className="d-flex h-100">
         <AuthForm
           content={{
-            page: "login",
-            title: "Sign in",
-            description: "Don’t have an account？",
-            extra: "Sign up",
-            btn: "Sign in"
+            page: "signup",
+            title: "Create an account",
+            description: "Let’s get started",
+            extra: "",
+            btn: "Sign up"
           }}
         />
         <AuthRight />
@@ -21,4 +21,4 @@ const AuthPage = () => {
   );
 };
 
-export default AuthPage;
+export default SignupPage;

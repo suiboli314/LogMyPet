@@ -25,6 +25,19 @@ const getPets = async function (page = 0) {
   }
 };
 
+const createUser = async (req, res) => {
+  let client;
+
+  try {
+    client = new MongoClient(mongoURL);
+    return await client.db("users").collection("usersLists").insertOne(req.body);
+  } catch (e) {
+    console.log(e.message || "err ocurred while creating user");
+    res.sendStatus(500);
+  }
+};
+
 export default {
   getPets,
+  createUser,
 };

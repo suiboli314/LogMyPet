@@ -1,0 +1,16 @@
+.log-section {
+  overflow-y: auto;
+}
+
+.log-section-add-record-button {
+  border-radius: 16px;
+  margin: 48px 0 22px 0;
+}
+
+.plus-icon {
+  margin-right: 4px;
+}
+
+.log-section-items {
+  overflow-y: auto;
+}

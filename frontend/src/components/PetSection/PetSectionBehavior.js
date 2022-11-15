@@ -2,11 +2,9 @@ import React from "react";
 
 import PetSectionBehaviorItem from "./PetSectionBehaviorItem";
 
-// import "../assets/styles/PetSectionBehavior.css";
-
 function PetSectionBehavior() {
   return (
-    <div className="col-6 d-flex flex-column align-items-end">
+    <div className="col-12 col-xl-6 d-flex flex-column align-items-end">
       <PetSectionBehaviorItem />
       <PetSectionBehaviorItem />
       <PetSectionBehaviorItem />

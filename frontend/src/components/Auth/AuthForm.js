@@ -1,22 +1,41 @@
 import React from "react";
-import "../../assets/styles/Auth.css";
 import PropTypes from "prop-types";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import "../../assets/styles/Auth.css";
 
 const AuthForm = ({ content }) => {
   const nameInputRef = useRef();
   const passwordInputRef = useRef();
-  // const [isLogin, setIsLogin] = useState(false);
+  let navigate = useNavigate();
   const [isAuthCorrect, setIsAuthCorrect] = useState(true);
   const [errAlert, setErrAlert] = useState("");
+
+  useEffect(() => {
+    async function check() {
+      fetch("/api/getCurrUser", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((res) => {
+        if (res.ok) {
+          navigate("/");
+        } else {
+          console.log("err");
+        }
+      });
+      console.log("effect");
+    }
+
+    check();
+  }, []);
 
   const submitHandler = (event) => {
     event.preventDefault();
 
     const enteredName = nameInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
-
-    console.log(enteredName, enteredPassword);
 
     if (enteredName == "" || enteredPassword == "") {
       setIsAuthCorrect(false);
@@ -40,30 +59,23 @@ const AuthForm = ({ content }) => {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
     }).then((res) => {
       if (res.ok) {
-        // do sth
+        if (content.page == "login") {
+          navigate("/");
+        }
       } else {
-        alert(res.statusText);
+        if (res.status == 403 && content.page == "login") {
+          setIsAuthCorrect(false);
+          setErrAlert("Incorrect account");
+        }
+
+        if (res.status == 403 && content.page == "signup") {
+          navigate("/login");
+        }
       }
     });
-
-    // if (isLogin) {
-    //   // do sth
-    // } else {
-    //   fetch("/api/signup", {
-    //     method: "POST",
-    //     body: JSON.stringify({
-    //       username: enteredName,
-    //       password: enteredPassword,
-    //     }),
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   }).then((res) => {
-    //     console.log(0, res);
-    //   });
-    // }
   };
 
   return (
@@ -80,7 +92,6 @@ const AuthForm = ({ content }) => {
           )}
 
           <h3>{content.title}</h3>
-          {/* props */}
           <div className="auth-text">
             {content.description}
             <span style={{ color: "#323EF7" }}>{content.extra}</span>

@@ -16,10 +16,8 @@ router.get("/api/pets", async (req, res) => {
   res.json(pets);
 });
 
-router.post("/api/signup", async (req, res) => {
-  const user = await db.createUser(req, res);
-  console.log("A user was inserted:", user);
-  res.json(user);
-});
+router.get("/api/getCurrUser", db.userAuthStatus);
+router.post("/api/signup", db.createUser);
+router.post("/api/login", db.authenticate);
 
 export default router;

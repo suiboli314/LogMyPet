@@ -32,7 +32,6 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
-
 app.use(express.static(path.resolve(__dirname, "frontend/build")));
 app.use("/", indexRouter);
 app.get("*", (req, res) => {

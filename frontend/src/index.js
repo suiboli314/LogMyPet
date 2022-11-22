@@ -4,6 +4,8 @@ import ReactDOM from "react-dom/client";
 import App from "./pages/App.js";
 import { BrowserRouter } from "react-router-dom";
 
+import ModalProvider from "./context/modal-context";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "./assets/fonts/Poppins/Poppins-Thin.ttf";
@@ -20,8 +22,10 @@ import "./assets/styles/index.css";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <ModalProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ModalProvider>
   </React.StrictMode>
 );

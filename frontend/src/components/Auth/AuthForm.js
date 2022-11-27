@@ -22,7 +22,7 @@ const AuthForm = ({ content }) => {
         if (res.ok) {
           navigate("/");
         } else {
-          console.log("err");
+          navigate("/login");
         }
       });
       console.log("effect");
@@ -63,7 +63,11 @@ const AuthForm = ({ content }) => {
     }).then((res) => {
       if (res.ok) {
         if (content.page == "login") {
-          navigate("/");
+          navigate("/create");
+        }
+
+        if (content.page == "signup") {
+          navigate("/login");
         }
       } else {
         if (res.status == 403 && content.page == "login") {
@@ -76,6 +80,10 @@ const AuthForm = ({ content }) => {
         }
       }
     });
+  };
+
+  const navigateToSignup = () => {
+    navigate("/signup");
   };
 
   return (
@@ -94,7 +102,9 @@ const AuthForm = ({ content }) => {
           <h3>{content.title}</h3>
           <div className="auth-text">
             {content.description}
-            <span style={{ color: "#323EF7" }}>{content.extra}</span>
+            <span onClick={navigateToSignup} style={{ color: "#323EF7" }}>
+              {content.extra}
+            </span>
           </div>
           <form onSubmit={submitHandler}>
             <input

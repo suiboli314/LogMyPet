@@ -33,6 +33,7 @@
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "react-bootstrap": "^2.6.0",
+    "react-loading-skeleton": "^3.1.0",
     "react-router": "^6.4.3",
     "react-router-dom": "^6.4.3",
     "style-loader": "^3.3.1"

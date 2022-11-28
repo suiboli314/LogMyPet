@@ -1,14 +1,22 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import RadioGroup from "../PetInfoForm/RadioGroup";
 
 import "../../assets/styles/CreateRecord.css";
 import "../../assets/styles/RadioGroup.css";
 
 const RecordForm = () => {
+  const navigate = useNavigate();
+
   const [categories, setCategories] = useState([]);
-  // const [pets, setPets] = useState([]);
+  const [allPets, setAllPets] = useState([]);
+  const [pets, setPets] = useState([]);
   const [selectedPet, setSelectedPet] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState(
+    "638409972cee931320d80a80"
+  );
+  const [description, setDescription] = useState("");
 
   useEffect(() => {
     async function getCategories() {
@@ -34,7 +42,9 @@ const RecordForm = () => {
         },
       });
       const data = await res.json();
-      // setPets(data);
+      const names = data.map((item) => item.name);
+      setPets(names);
+      setAllPets(data);
       setSelectedPet(data[0].name);
     }
 
@@ -42,12 +52,53 @@ const RecordForm = () => {
     getPets();
   }, []);
 
+  const handleSubmit = async () => {
+    const record = {
+      category: {
+        id: selectedCategory,
+        name: categories.filter((item) => item._id == selectedCategory)[0].name,
+      },
+      petId: allPets.filter((item) => item.name == selectedPet)[0]._id,
+      about: description,
+    };
+    console.log(record);
+    const res = await fetch("/api/createRecord", {
+      method: "POST",
+      body: JSON.stringify(record),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (res.ok) {
+      navigate("/");
+    } else {
+      console.log("Failed to create record");
+    }
+  };
+
   return (
-    <form>
+    <form
+      onSubmit={(event) => {
+        event.preventDefault();
+        handleSubmit();
+      }}
+    >
       <div className="cr-title">Category</div>
       <div className="cr-group">
         {categories.map((category) => (
-          <div className="cr-col" key={category._id}>
+          <div
+            className={
+              selectedCategory == category._id
+                ? "cr-col cr-col-orange"
+                : "cr-col"
+            }
+            key={category._id}
+            id={category._id}
+            onClick={(event) => {
+              setSelectedCategory(event.currentTarget.id);
+            }}
+          >
             <img className="cr-pic" src={category.imgUrl}></img>
             <div>{category.name}</div>
           </div>
@@ -55,7 +106,7 @@ const RecordForm = () => {
       </div>
       <RadioGroup
         title="You are recording for?"
-        options={["Lilca", "Bambi"]}
+        options={pets}
         value={selectedPet}
         setValue={(value) => {
           setSelectedPet(value);
@@ -66,6 +117,9 @@ const RecordForm = () => {
         className="form-control"
         placeholder="Description"
         aria-label="Description"
+        onChange={(event) => {
+          setDescription(event.target.value);
+        }}
       ></textarea>
       <div className="d-flex flex-column pet-info-form-button-section">
         <button

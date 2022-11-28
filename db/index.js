@@ -1,7 +1,7 @@
 import { MongoClient, ObjectId } from "mongodb";
 import config from "../config.js";
-import passport from "passport";
-import LocalStrategy from "passport-local";
+// import passport from "passport";
+// import LocalStrategy from "passport-local";
 
 // const mongoURL = config.MONGO_URL || "mongodb://localhost:27017";
 const mongoURL =
@@ -14,43 +14,43 @@ const RECORD_COLLECTION_NAME = "records";
 const CATEGORY_COLLECTION_NAME = "categories";
 const PAGE_SIZE = 20;
 
-const strategy = new LocalStrategy(async function verify(
-  username,
-  password,
-  cb
-) {
-  let client = new MongoClient(mongoURL);
+// const strategy = new LocalStrategy(async function verify(
+//   username,
+//   password,
+//   cb
+// ) {
+//   let client = new MongoClient(mongoURL);
 
-  const result = await client
-    .db(DB_NAME)
-    .collection(USER_COLLECTION_NAME)
-    .find({ username: username })
-    .toArray();
+//   const result = await client
+//     .db(DB_NAME)
+//     .collection(USER_COLLECTION_NAME)
+//     .find({ username: username })
+//     .toArray();
 
-  const user = result[0];
-  if (!user) return cb(null, false);
-  user.id = result[0]._id.toString();
+//   const user = result[0];
+//   if (!user) return cb(null, false);
+//   user.id = result[0]._id.toString();
 
-  if (password == result[0].password) {
-    return cb(null, user);
-  } else {
-    return cb(null, false);
-  }
-});
+//   if (password == result[0].password) {
+//     return cb(null, user);
+//   } else {
+//     return cb(null, false);
+//   }
+// });
 
-passport.use(strategy);
+// passport.use(strategy);
 
-passport.serializeUser(function (user, cb) {
-  process.nextTick(function () {
-    cb(null, { id: user.id, username: user.username });
-  });
-});
+// passport.serializeUser(function (user, cb) {
+//   process.nextTick(function () {
+//     cb(null, { id: user.id, username: user.username });
+//   });
+// });
 
-passport.deserializeUser(function (user, cb) {
-  process.nextTick(function () {
-    return cb(null, user);
-  });
-});
+// passport.deserializeUser(function (user, cb) {
+//   process.nextTick(function () {
+//     return cb(null, user);
+//   });
+// });
 
 const getPets = async (req, res) => {
   let client;
@@ -163,26 +163,35 @@ const deletePet = async (req, res) => {
 };
 
 const userAuthStatus = async (req, res) => {
-  if (req.isAuthenticated()) {
-    res.sendStatus(200);
-  } else {
-    res.sendStatus(403);
-  }
+  res.json({
+    isLoggedIn: !!req.session.user,
+    user: req.session.user,
+  });
 };
 
 const authenticate = async (req, res) => {
-  passport.authenticate("local", (err, user) => {
-    console.log("Test:", res);
-    if (err) throw err;
-    if (!user) {
-      res.sendStatus(200);
-    } else {
-      req.logIn(user, (err) => {
-        if (err) throw err;
-        res.sendStatus(200);
-      });
+  const user = req.body;
+  let client;
+  try {
+    client = new MongoClient(mongoURL);
+
+    const result = await client
+      .db(DB_NAME)
+      .collection(USER_COLLECTION_NAME)
+      .find({ username: user.username })
+      .toArray();
+
+    if (user.password == result[0].password) {
+      req.session.user = { user: user.username };
+      res.json({ isLoggedIn: true, err: null });
     }
-  })(req, res);
+  } catch (e) {
+    req.session.user = null;
+    res.json({
+      isLoggedIn: false,
+      err: "Incorrect username password combination",
+    });
+  }
 };
 
 const createUser = async (req, res) => {
@@ -233,10 +242,10 @@ const getCategories = async (req, res) => {
 
   try {
     client = new MongoClient(mongoURL);
-    const categoriesCol = client.db(DB_NAME).collection(CATEGORY_COLLECTION_NAME);
-    const result = await categoriesCol
-      .find({})
-      .toArray();
+    const categoriesCol = client
+      .db(DB_NAME)
+      .collection(CATEGORY_COLLECTION_NAME);
+    const result = await categoriesCol.find({}).toArray();
     console.log("Retrieved categories");
     res.json(result);
   } catch (err) {

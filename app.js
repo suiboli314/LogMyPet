@@ -1,4 +1,6 @@
 import express from "express";
+import session from "express-session";
+
 import morgan from "morgan";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
@@ -7,7 +9,6 @@ import config from "./config.js";
 import indexRouter from "./api/index.js";
 
 import passport from "passport";
-import session from "express-session";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -27,12 +28,18 @@ app.use(
     secret: config.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
+    cookie: {
+      secure: true,
+      maxAge: 3000000 * 60,
+    },
   })
 );
 
 app.use(passport.initialize());
 app.use(passport.session());
+
 app.use(express.static(path.resolve(__dirname, "frontend/build")));
+
 app.use("/", indexRouter);
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "frontend/build/index.html"));

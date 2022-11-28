@@ -175,12 +175,11 @@ const authenticate = async (req, res) => {
     console.log("Test:", res);
     if (err) throw err;
     if (!user) {
-      // res.sendStatus(403);
+      res.sendStatus(200);
     } else {
       req.logIn(user, (err) => {
         if (err) throw err;
-        console.log("Test:", res);
-        // res.sendStatus(200);
+        res.sendStatus(200);
       });
     }
   })(req, res);

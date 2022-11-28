@@ -1,5 +1,9 @@
 # LogMyPet
 
+[80% Milestone](https://github.com/YixiangXie-NEU/LogMyPet/releases/tag/milestone-80pct)
+
+[60% Milestone](https://github.com/YixiangXie-NEU/LogMyPet/releases/tag/milestone-60pct)
+
 This is the repo of [LogMyPet](https://github.com/YixiangXie-NEU/LogMyPet).
 
 **Author**: Yixiang Xie & Ting Tang

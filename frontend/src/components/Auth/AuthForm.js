@@ -1,13 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "../../assets/styles/Auth.css";
 
 const AuthForm = ({ content }) => {
   const nameInputRef = useRef();
   const passwordInputRef = useRef();
-  let navigate = useNavigate();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [isAuthCorrect, setIsAuthCorrect] = useState(true);
   const [errAlert, setErrAlert] = useState("");
 
@@ -22,10 +25,9 @@ const AuthForm = ({ content }) => {
         if (res.ok) {
           navigate("/");
         } else {
-          navigate("/login");
+          if (location.pathname != "/signup") navigate("/login");
         }
       });
-      console.log("effect");
     }
 
     check();

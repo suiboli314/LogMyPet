@@ -1,14 +1,14 @@
 import express from "express";
+import cookieParser from "cookie-parser";
+import bodyParser from "body-parser";
 import session from "express-session";
+import passport from "passport";
 
 import morgan from "morgan";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
-import cookieParser from "cookie-parser";
 import config from "./config.js";
 import indexRouter from "./api/index.js";
-
-import passport from "passport";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -17,12 +17,14 @@ const app = express();
 
 const PORT = config.PORT || 3000;
 
+app.use(express.static(path.resolve(__dirname, "frontend/build")));
+
 app.use(morgan("tiny"));
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(cookieParser());
 app.use(
   session({
     secret: config.SESSION_SECRET,
@@ -38,7 +40,6 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(express.static(path.resolve(__dirname, "frontend/build")));
 
 app.use("/", indexRouter);
 app.get("*", (req, res) => {

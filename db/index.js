@@ -230,7 +230,7 @@ const createRecord = async (req, res) => {
       .collection(RECORD_COLLECTION_NAME)
       .insertOne(req.body);
     console.log(`A new record was inserted with the _id: ${result.insertedId}`);
-    res.sendStatus(200);
+    res.json(result);
   } catch (err) {
     console.log(`Error occurred while creating record: ${err.message}`);
     res.sendStatus(500);

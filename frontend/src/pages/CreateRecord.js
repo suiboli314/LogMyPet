@@ -1,7 +1,6 @@
 import React from "react";
 // import { useState, useEffect } from "react";
 import RecordForm from "../components/RecordForm";
-// import { useNavigate } from "react-router-dom";
 
 const CreateRecord = () => {
   return (
@@ -13,5 +12,7 @@ const CreateRecord = () => {
     </div>
   );
 };
+
+CreateRecord.propTypes = {};
 
 export default CreateRecord;

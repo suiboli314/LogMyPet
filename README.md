@@ -1,5 +1,7 @@
 # LogMyPet
 
+[1.0.0 Release](https://github.com/YixiangXie-NEU/LogMyPet/releases/tag/release-1.0.0)
+
 [80% Milestone](https://github.com/YixiangXie-NEU/LogMyPet/releases/tag/milestone-80pct)
 
 [60% Milestone](https://github.com/YixiangXie-NEU/LogMyPet/releases/tag/milestone-60pct)

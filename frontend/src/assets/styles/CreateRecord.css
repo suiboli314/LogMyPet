@@ -1,0 +1,17 @@
+.cr-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.cr-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cr-pic {
+  width: 15vw;
+  height: 15vw;
+}

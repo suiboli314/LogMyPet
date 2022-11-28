@@ -4,9 +4,12 @@ import passport from "passport";
 import LocalStrategy from "passport-local";
 
 const mongoURL = config.MONGO_URL || "mongodb://localhost:27017";
+
 const DB_NAME = "logMyPetDB";
 const PET_COLLECTION_NAME = "pets";
 const USER_COLLECTION_NAME = "users";
+const RECORD_COLLECTION_NAME = "records";
+const CATEGORY_COLLECTION_NAME = "categories";
 const PAGE_SIZE = 20;
 
 const strategy = new LocalStrategy(async function verify(
@@ -23,6 +26,7 @@ const strategy = new LocalStrategy(async function verify(
     .toArray();
 
   const user = result[0];
+  if (!user) return cb(null, false);
   user.id = result[0]._id.toString();
 
   if (password == result[0].password) {
@@ -204,6 +208,40 @@ const createUser = async (req, res) => {
   }
 };
 
+const createRecord = async (req, res) => {
+  let client;
+
+  try {
+    client = new MongoClient(mongoURL);
+    const result = await client
+      .db(DB_NAME)
+      .collection(RECORD_COLLECTION_NAME)
+      .insertOne(req.body);
+    console.log(`A new record was inserted with the _id: ${result.insertedId}`);
+    res.sendStatus(200);
+  } catch (err) {
+    console.log(`Error occurred while creating record: ${err.message}`);
+    res.sendStatus(500);
+  }
+};
+
+const getCategories = async (req, res) => {
+  let client;
+
+  try {
+    client = new MongoClient(mongoURL);
+    const categoriesCol = client
+      .db(DB_NAME)
+      .collection(CATEGORY_COLLECTION_NAME);
+    const result = await categoriesCol.find({}).toArray();
+    console.log("Retrieved categories");
+    res.json(result);
+  } catch (err) {
+    console.log(`Error occurred while getting categories: ${err.message}`);
+    res.sendStatus(500);
+  }
+};
+
 export default {
   getPets,
   getOnePet,
@@ -212,5 +250,7 @@ export default {
   deletePet,
   userAuthStatus,
   createUser,
+  createRecord,
+  getCategories,
   authenticate,
 };

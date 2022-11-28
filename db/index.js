@@ -3,8 +3,10 @@ import config from "../config.js";
 import passport from "passport";
 import LocalStrategy from "passport-local";
 
-const mongoURL = config.MONGO_URL || "mongodb://localhost:27017";
-
+// const mongoURL = config.MONGO_URL || "mongodb://localhost:27017";
+const mongoURL =
+  config.MONGO_URL ||
+  "mongodb+srv://dylantse:IHcuwrJ9F648zvYH@cluster0.vrljs4f.mongodb.net/?retryWrites=true&w=majority";
 const DB_NAME = "logMyPetDB";
 const PET_COLLECTION_NAME = "pets";
 const USER_COLLECTION_NAME = "users";
@@ -230,10 +232,10 @@ const getCategories = async (req, res) => {
 
   try {
     client = new MongoClient(mongoURL);
-    const categoriesCol = client
-      .db(DB_NAME)
-      .collection(CATEGORY_COLLECTION_NAME);
-    const result = await categoriesCol.find({}).toArray();
+    const categoriesCol = client.db(DB_NAME).collection(CATEGORY_COLLECTION_NAME);
+    const result = await categoriesCol
+      .find({})
+      .toArray();
     console.log("Retrieved categories");
     res.json(result);
   } catch (err) {

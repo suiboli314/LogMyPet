@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-bottom: 32px;
 }
 
 .cr-col {
@@ -14,4 +15,15 @@
 .cr-pic {
   width: 15vw;
   height: 15vw;
+}
+
+.cr-title {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 38px;
+  margin-bottom: 4px;
+}
+
+.cr-input {
+  margin-bottom: 6px;
 }

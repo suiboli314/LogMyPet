@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useState, useRef, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import "../../assets/styles/Auth.css";
 
 const AuthForm = ({ content }) => {
@@ -9,29 +9,29 @@ const AuthForm = ({ content }) => {
   const passwordInputRef = useRef();
 
   const navigate = useNavigate();
-  const location = useLocation();
+  // const location = useLocation();
 
   const [isAuthCorrect, setIsAuthCorrect] = useState(true);
   const [errAlert, setErrAlert] = useState("");
 
-  useEffect(() => {
-    async function check() {
-      fetch("/api/getCurrUser", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then((res) => {
-        if (res.ok) {
-          navigate("/");
-        } else {
-          if (location.pathname != "/signup") navigate("/login");
-        }
-      });
-    }
+  // useEffect(() => {
+  //   async function check() {
+  //     fetch("/api/getCurrUser", {
+  //       method: "GET",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     }).then((res) => {
+  //       if (res.ok) {
+  //         navigate("/");
+  //       } else {
+  //         if (location.pathname != "/signup") navigate("/login");
+  //       }
+  //     });
+  //   }
 
-    check();
-  }, []);
+  //   check();
+  // }, []);
 
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -52,7 +52,7 @@ const AuthForm = ({ content }) => {
       BASE_URL = "/api/signup";
     }
 
-    const res = fetch(BASE_URL, {
+    const result = fetch(BASE_URL, {
       method: "POST",
       body: JSON.stringify({
         username: enteredName,
@@ -63,12 +63,11 @@ const AuthForm = ({ content }) => {
       },
       credentials: "include",
     });
-    const resUser = await res.json();
-    console.log(66666666, resUser);
-    if (resUser.isLoggedIn) {
+    const res = await result;
+    if (res.ok) {
       navigate("/create");
     } else {
-      setErrAlert(resUser.err);
+      setErrAlert("Incorrect account");
     }
   };
 

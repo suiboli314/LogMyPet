@@ -182,15 +182,16 @@ const authenticate = async (req, res) => {
       .toArray();
 
     if (user.password == result[0].password) {
-      req.session.user = { user: user.username };
-      res.json({ isLoggedIn: true, err: null });
+      // req.session.user = { user: user.username };
+      res.json(result);
     }
   } catch (e) {
-    req.session.user = null;
-    res.json({
-      isLoggedIn: false,
-      err: "Incorrect username password combination",
-    });
+    console.log(e);
+    // req.session.user = null;
+    // res.json({
+    //   isLoggedIn: false,
+    //   err: "Incorrect username password combination",
+    // });
   }
 };
 

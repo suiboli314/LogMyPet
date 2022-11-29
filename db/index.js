@@ -70,7 +70,7 @@ const getPets = async (req, res) => {
     res.json(result);
   } catch (err) {
     console.log(`Error occurred while getting pets: ${err.message}`);
-    res.json({ status: 500 });
+    res.status(500).json({ error: err.message });
   } finally {
     console.log("getPets: Closing db connection");
     client.close();
@@ -92,7 +92,7 @@ const getOnePet = async (req, res) => {
     console.log(
       `Error occurred while getting pet ${req.params.id}: ${err.message}`
     );
-    res.json({ status: 500 });
+    res.status(500).json({ error: err.message });
   } finally {
     console.log("getOnePet: Closing db connection");
     client.close();
@@ -110,7 +110,7 @@ const createPet = async (req, res) => {
     res.json(result);
   } catch (err) {
     console.log(`Error occurred while creating pet: ${err.message}`);
-    res.json({ status: 500 });
+    res.status(500).json({ error: err.message });
   } finally {
     console.log("createPet: Closing db connection");
     client.close();
@@ -123,19 +123,19 @@ const editPet = async (req, res) => {
   try {
     client = new MongoClient(mongoURL);
     const petsCol = client.db(DB_NAME).collection(PET_COLLECTION_NAME);
-    await petsCol.updateOne(
+    const result = await petsCol.updateOne(
       { _id: ObjectId(req.params.id) },
       {
         $set: req.body,
       }
     );
     console.log(`Pet ${req.params.id} is updated.`);
-    res.json({ status: 200 });
+    res.json(result);
   } catch (err) {
     console.log(
       `Error occurred while getting pet ${req.params.id}: ${err.message}`
     );
-    res.json({ status: 500 });
+    res.status(500).json({ error: err.message });
   } finally {
     console.log("editPet: Closing db connection");
     client.close();
@@ -148,14 +148,14 @@ const deletePet = async (req, res) => {
   try {
     client = new MongoClient(mongoURL);
     const petsCol = client.db(DB_NAME).collection(PET_COLLECTION_NAME);
-    await petsCol.deleteOne({ _id: ObjectId(req.params.id) });
+    const result = await petsCol.deleteOne({ _id: ObjectId(req.params.id) });
     console.log(`Pet ${req.params.id} is deleted.`);
-    res.json({ status: 200 });
+    res.json(result);
   } catch (err) {
     console.log(
       `Error occurred while deleting pet ${req.params.id}: ${err.message}`
     );
-    res.json({ status: 500 });
+    res.status(500).json({ error: err.message });
   } finally {
     console.log("deletePet: Closing db connection");
     client.close();
@@ -207,7 +207,7 @@ const createUser = async (req, res) => {
       .find({ username: req.body.username })
       .toArray();
 
-    if (result.length > 0) res.sendStatus(403);
+    if (result.length > 0) res.status(403).json({ error: "403" });
     else {
       await client
         .db(DB_NAME)
@@ -217,7 +217,7 @@ const createUser = async (req, res) => {
     }
   } catch (e) {
     console.log(e.message || "err ocurred while creating user");
-    res.json({ status: 500 });
+    res.status(500).json({ error: e.message });
   }
 };
 
@@ -234,7 +234,7 @@ const createRecord = async (req, res) => {
     res.json(result);
   } catch (err) {
     console.log(`Error occurred while creating record: ${err.message}`);
-    res.json({ status: 500 });
+    res.status(500).json({ error: err.message });
   }
 };
 
@@ -251,7 +251,7 @@ const getCategories = async (req, res) => {
     res.json(result);
   } catch (err) {
     console.log(`Error occurred while getting categories: ${err.message}`);
-    res.json({ status: 500 });
+    res.status(500).json({ error: err.message });
   }
 };
 

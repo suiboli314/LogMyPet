@@ -7,6 +7,8 @@ import "../../assets/styles/Tags.css";
 import "../../assets/styles/LogSectionItem.css";
 
 const LogSectionItem = ({ record }) => {
+  const URL = `/log-detail/${record._id}`;
+
   return (
     <div className="d-flex align-items-center background-purple-light login-section-item">
       <div className="col-3 d-flex align-items-center">
@@ -18,7 +20,7 @@ const LogSectionItem = ({ record }) => {
       <div>
         <span className="tag background-orange-light">Active</span>
       </div>
-      <a href="/detail/1" className="log-section-item-anchor">
+      <a href={URL} className="log-section-item-anchor">
         <UilEllipsis size="30" color={"#323EF7"} />
         <span className="visually-hidden">Detail</span>
       </a>

@@ -240,6 +240,73 @@ const getCategories = async (req, res) => {
   }
 };
 
+const getOneRecord = async (req, res) => {
+  let client;
+  console.log(req.params.id);
+
+  try {
+    client = new MongoClient(mongoURL);
+    const recordCol = client.db(DB_NAME).collection(RECORD_COLLECTION_NAME);
+    const result = await recordCol
+      .find({ _id: ObjectId(req.params.id) })
+      .toArray();
+    console.log(`Record ${req.params.id} is retrieved.`);
+    res.json(result);
+  } catch (err) {
+    console.log(
+      `Error occurred while getting pet ${req.params.id}: ${err.message}`
+    );
+    res.json({ status: 500 });
+  }
+};
+
+const editRecord = async (req, res) => {
+  let client;
+
+  try {
+    client = new MongoClient(mongoURL);
+    const recordCol = client.db(DB_NAME).collection(RECORD_COLLECTION_NAME);
+    await recordCol.updateOne(
+      { _id: ObjectId(req.params.id) },
+      {
+        $set: {
+          about: req.body.content,
+        },
+      }
+    );
+    console.log(`Record ${req.params.id} is updated.`);
+    res.json({ status: 200 });
+  } catch (err) {
+    console.log(
+      `Error occurred while getting record ${req.params.id}: ${err.message}`
+    );
+    res.json({ status: 500 });
+  } finally {
+    console.log("editRecord: Closing db connection");
+    client.close();
+  }
+};
+
+const deleteRecord = async (req, res) => {
+  let client;
+
+  try {
+    client = new MongoClient(mongoURL);
+    const recordCol = client.db(DB_NAME).collection(RECORD_COLLECTION_NAME);
+    await recordCol.deleteOne({ _id: ObjectId(req.params.id) });
+    console.log(`Record ${req.params.id} is deleted.`);
+    res.json({ status: 200 });
+  } catch (err) {
+    console.log(
+      `Error occurred while deleting record ${req.params.id}: ${err.message}`
+    );
+    res.json({ status: 500 });
+  } finally {
+    console.log("deleteRecord: Closing db connection");
+    client.close();
+  }
+};
+
 function randomIntFromInterval(min, max) {
   // min and max included
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -251,11 +318,6 @@ const seedDB = async () => {
   try {
     client = new MongoClient(mongoURL);
     const collection = client.db(DB_NAME).collection(RECORD_COLLECTION_NAME);
-    console.log("Connected correctly to server");
-
-    // The drop() command destroys all data from a collection.
-    // Make sure you run it against proper database and collection.
-    // collection.drop();
 
     // make a bunch of time series data
     let records = [];
@@ -306,7 +368,10 @@ export default {
   userAuthStatus,
   createUser,
   createRecord,
+  getOneRecord,
   getRecords,
+  editRecord,
+  deleteRecord,
   getCategories,
   authenticate,
   seedDB,

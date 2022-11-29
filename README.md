@@ -32,9 +32,9 @@ This is the repo of [LogMyPet](https://github.com/YixiangXie-NEU/LogMyPet).
 
 **Design mockup**: [link](https://www.figma.com/file/kyL3RojSAam6b4RxOKTzTF/PetHabit?node-id=0%3A1)
 
-**Introduction slides**: [link]()
+**Introduction slides**: [link](https://docs.google.com/presentation/d/19ZK8kJeYIDDTnDwqYiGKI07whW3-gMjaf_3VJhFXx94/edit?usp=sharing)
 
-**Demo video**: [link]()
+**Demo video**: [link](https://youtu.be/y4Sch-2FSwQ)
 
 **Technical requirements**: React with hooks, Bootstrap, Node, Express, Mongo
 

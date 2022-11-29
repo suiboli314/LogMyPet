@@ -1,7 +1,5 @@
 # LogMyPet
 
-[1.0.0 Release](https://github.com/YixiangXie-NEU/LogMyPet/releases/tag/release-1.0.0)
-
 [80% Milestone](https://github.com/YixiangXie-NEU/LogMyPet/releases/tag/milestone-80pct)
 
 [60% Milestone](https://github.com/YixiangXie-NEU/LogMyPet/releases/tag/milestone-60pct)
@@ -12,7 +10,7 @@ This is the repo of [LogMyPet](https://github.com/YixiangXie-NEU/LogMyPet).
 
 **Class Link**: [link](https://johnguerra.co/classes/webDevelopment_fall_2022/)
 
-**Project Objective**: For project 3, we are required to create a full stack application with Node + Express + Mongo as the backend and React with hooks as the frontend. We decided to build a platform that allows the users to create profiles for their pets and to log several behaviors for their pets, such as drinking water, eating food or defecating. Users can also view the statistics of each of these behaviors, such as the frequencies and amount.
+**Project Objective**: For project 3, we are required to create a full stack application with Node + Express + Mongo as the backend and React with hooks as the frontend. We decided to build a platform that allows the users to create profiles for their pets and to log several behaviors for their pets, such as drinking water, eating food or defecating.
 
 **Screenshot**:
 

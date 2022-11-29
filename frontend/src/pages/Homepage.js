@@ -1,6 +1,6 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { ModalContext } from "../context/modal-context";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 import LeftPanel from "../components/LeftPanel";
 import RightPanel from "../components/RightPanel";
@@ -10,26 +10,26 @@ import Mask from "../components/Popups/Mask";
 
 const Homepage = () => {
   const openModal = useContext(ModalContext).openModal;
-  let navigate = useNavigate();
+  // let navigate = useNavigate();
 
-  useEffect(() => {
-    async function check() {
-      fetch("/api/getCurrUser", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then((res) => {
-        if (res.ok) {
-          console.log(res.ok);
-        } else {
-          navigate("/login");
-        }
-      });
-    }
+  // useEffect(() => {
+  //   async function check() {
+  //     fetch("/api/getCurrUser", {
+  //       method: "GET",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     }).then((res) => {
+  //       if (res.ok) {
+  //         console.log(res.ok);
+  //       } else {
+  //         navigate("/login");
+  //       }
+  //     });
+  //   }
 
-    check();
-  }, []);
+  //   check();
+  // }, []);
 
   return (
     <div>

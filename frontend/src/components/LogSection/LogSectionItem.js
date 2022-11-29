@@ -1,19 +1,20 @@
 import React from "react";
 import UilEllipsis from "@iconscout/react-unicons/icons/uil-ellipsis-h";
+import PropTypes from "prop-types";
 
 import "../../assets/styles/Colors.css";
 import "../../assets/styles/Tags.css";
 import "../../assets/styles/LogSectionItem.css";
 
-const LogSectionItem = () => {
+const LogSectionItem = ({ record }) => {
   return (
     <div className="d-flex align-items-center background-purple-light login-section-item">
       <div className="col-3 d-flex align-items-center">
-        <div className="log-section-item-pic purple-solid"></div>
-        <span className="log-section-item-title">Brush teeth</span>
+        <img className="log-section-item-pic" src={record.category.imgUrl} />
+        <span className="log-section-item-title">{record.category.name}</span>
       </div>
-      <div className="col-2">25 Nov 2022</div>
-      <div className="col-5">Seems like he didn’t pee yesterday</div>
+      <div className="col-2">{record.timestamp_day}</div>
+      <div className="col-5 log-section-text">{record.about}</div>
       <div>
         <span className="tag background-orange-light">Active</span>
       </div>
@@ -25,6 +26,8 @@ const LogSectionItem = () => {
   );
 };
 
-LogSectionItem.propTypes = {};
+LogSectionItem.propTypes = {
+  record: PropTypes.object.isRequired,
+};
 
 export default LogSectionItem;

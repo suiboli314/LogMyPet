@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { Fragment } from "react";
+import Skeleton from "react-loading-skeleton";
 
 import "../../assets/styles/Colors.css";
 import "../../assets/styles/PetProfile.css";
@@ -15,12 +16,22 @@ const PetProfile = ({ name, gender, weight, neuteredOrSpayed }) => (
       ></img>
     </div>
     <div className="d-flex flex-column">
-      <span className="pet-profile-title">{name}</span>
+      {name === undefined ? (
+        <Skeleton width="100px" />
+      ) : (
+        <span className="pet-profile-title">{name}</span>
+      )}
       <div className="pet-profile-description">
-        <span>{gender}</span>
-        <span>{weight}</span>
-        {neuteredOrSpayed && (
-          <span>{gender === "Male" ? "Neutered" : "Spayed"}</span>
+        {gender === undefined ? (
+          <Skeleton width="100px" className="mt-4" />
+        ) : (
+          <Fragment>
+            <span>{gender}</span>
+            <span>{weight}</span>
+            {neuteredOrSpayed && (
+              <span>{gender === "Male" ? "Neutered" : "Spayed"}</span>
+            )}{" "}
+          </Fragment>
         )}
       </div>
     </div>
@@ -28,10 +39,10 @@ const PetProfile = ({ name, gender, weight, neuteredOrSpayed }) => (
 );
 
 PetProfile.propTypes = {
-  name: PropTypes.string.isRequired,
-  gender: PropTypes.string.isRequired,
-  weight: PropTypes.string.isRequired,
-  neuteredOrSpayed: PropTypes.bool.isRequired,
+  name: PropTypes.string,
+  gender: PropTypes.string,
+  weight: PropTypes.string,
+  neuteredOrSpayed: PropTypes.bool,
 };
 
 export default PetProfile;

@@ -34,3 +34,25 @@
   border: 1px solid #fe5000;
   border-radius: 5px;
 }
+
+.cr-col-transparent {
+  border: 1px solid transparent;
+  border-radius: 5px;
+}
+
+.record-form-button-section {
+  margin: 40px 0 100px 0;
+}
+
+.record-form-button-section > * + * {
+  margin-top: 16px;
+}
+
+.record-form-cancel-button {
+  padding: 7px;
+  border: 1px solid #d9d9d9;
+}
+
+.record-form-submit-button {
+  color: white;
+}

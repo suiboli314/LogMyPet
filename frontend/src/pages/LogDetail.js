@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
 import UilAngleLeft from "@iconscout/react-unicons/icons/uil-angle-left-b";
 import moment from "moment";
+import { useParams, useNavigate } from "react-router-dom";
 
 import PetProfile from "../components/PetSection/PetProfile";
 
@@ -15,6 +16,7 @@ const LogDetail = () => {
   const navigate = useNavigate();
 
   const [record, setRecord] = useState({});
+  const [pet, setPet] = useState({});
   const [content, setNewContent] = useState({});
   const [editRecord, setEditRecord] = useState(false);
 
@@ -27,7 +29,8 @@ const LogDetail = () => {
     });
     if (res.ok) {
       const data = await res.json();
-      data[0].timestamp_day = moment(data.timestamp_day).format("MMM Do YY");
+      data[0].timestamp_day = moment(data.timestamp_day).format("MMM Do YYYY");
+      data[0].category_name = data[0].category.name;
       setRecord(data[0]);
     } else {
       console.log(res.statusText);
@@ -37,6 +40,27 @@ const LogDetail = () => {
   useEffect(() => {
     getRecord();
   }, []);
+
+  const getPet = async () => {
+    const res = await fetch("/api/pet/" + record.petId, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (res.ok) {
+      const data = await res.json();
+      setPet(data[0]);
+    } else {
+      console.log(res.statusText);
+    }
+  };
+
+  useEffect(() => {
+    if (record.petId) {
+      getPet();
+    }
+  }, [record.petId]);
 
   const changeRecord = () => {
     setEditRecord(true);
@@ -85,14 +109,20 @@ const LogDetail = () => {
           Back
         </a>
         <PetProfile
-          name="Lilca"
-          gender="Male"
-          weight="5kg"
-          neuteredOrSpayed={true}
+          name={pet.name}
+          gender={pet.gender}
+          weight={pet.weight}
+          neuteredOrSpayed={pet.neuteredOrSpayed}
         />
         <div className="d-flex flex-column log-detail-edit">
           <div className="d-flex justify-content-between">
-            <span className="log-detail-date">{record.timestamp_day}</span>
+            <span className="log-detail-date">
+              {record.timestamp_day ? (
+                record.timestamp_day
+              ) : (
+                <Skeleton width="150px" />
+              )}
+            </span>
             <div>
               <img
                 onClick={changeRecord}
@@ -109,7 +139,11 @@ const LogDetail = () => {
           {!editRecord && (
             <div className="log-detail-content background-purple-light">
               <div className="log-detail-title">Description</div>
-              <div className="log-detail-description">{record.about}</div>
+              {record.category ? (
+                <div className="log-detail-description">{`${record.category.name}: ${record.about}`}</div>
+              ) : (
+                <Skeleton width="150px" className="mt-3" />
+              )}
             </div>
           )}
           {editRecord && (

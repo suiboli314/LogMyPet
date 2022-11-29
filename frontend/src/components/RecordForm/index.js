@@ -1,10 +1,12 @@
 import React from "react";
+import Skeleton from "react-loading-skeleton";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
 import RadioGroup from "../PetInfoForm/RadioGroup";
 
-import "../../assets/styles/CreateRecord.css";
-import "../../assets/styles/RadioGroup.css";
+import "../../assets/styles/Buttons.css";
+import "../../assets/styles/RecordForm.css";
 
 const RecordForm = () => {
   const navigate = useNavigate();
@@ -57,7 +59,8 @@ const RecordForm = () => {
       category: {
         id: selectedCategory,
         name: categories.filter((item) => item._id == selectedCategory)[0].name,
-        imgUrl: categories.filter((item) => item._id == selectedCategory)[0].imgUrl,
+        imgUrl: categories.filter((item) => item._id == selectedCategory)[0]
+          .imgUrl,
       },
       petId: allPets.filter((item) => item.name == selectedPet)[0]._id,
       timestamp_day: new Date(),
@@ -79,6 +82,10 @@ const RecordForm = () => {
     }
   };
 
+  const handleCancel = () => {
+    navigate("/");
+  };
+
   return (
     <form
       onSubmit={(event) => {
@@ -87,25 +94,29 @@ const RecordForm = () => {
       }}
     >
       <div className="cr-title">Category</div>
-      <div className="cr-group">
-        {categories.map((category) => (
-          <div
-            className={
-              selectedCategory == category._id
-                ? "cr-col cr-col-orange"
-                : "cr-col"
-            }
-            key={category._id}
-            id={category._id}
-            onClick={(event) => {
-              setSelectedCategory(event.currentTarget.id);
-            }}
-          >
-            <img className="cr-pic" src={category.imgUrl}></img>
-            <div>{category.name}</div>
-          </div>
-        ))}
-      </div>
+      {categories.length === 0 ? (
+        <Skeleton height="130px" width="100%" />
+      ) : (
+        <div className="cr-group">
+          {categories.map((category) => (
+            <div
+              className={
+                selectedCategory == category._id
+                  ? "pb-2 cr-col cr-col-orange"
+                  : "pb-2 cr-col cr-col-transparent"
+              }
+              key={category._id}
+              id={category._id}
+              onClick={(event) => {
+                setSelectedCategory(event.currentTarget.id);
+              }}
+            >
+              <img className="cr-pic" src={category.imgUrl}></img>
+              <div>{category.name}</div>
+            </div>
+          ))}
+        </div>
+      )}
       <RadioGroup
         title="You are recording for?"
         options={pets}
@@ -114,6 +125,9 @@ const RecordForm = () => {
           setSelectedPet(value);
         }}
       />
+      {pets.length === 0 && (
+        <Skeleton height="40px" width="100%" className="mb-4" />
+      )}
       <div className="cr-title">Record your observation</div>
       <textarea
         className="form-control"
@@ -123,11 +137,17 @@ const RecordForm = () => {
           setDescription(event.target.value);
         }}
       ></textarea>
-      <div className="d-flex flex-column pet-info-form-button-section">
+      <div className="d-flex flex-column record-form-button-section">
+        <button
+          className="medium-button record-form-cancel-button"
+          onClick={handleCancel}
+        >
+          Cancel
+        </button>
         <button
           type="submit"
           value="Submit"
-          className="medium-button purple-solid pet-info-form-submit-button"
+          className="medium-button purple-solid record-form-submit-button"
         >
           Create record
         </button>

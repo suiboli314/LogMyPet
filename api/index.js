@@ -10,8 +10,10 @@ router.put("/api/pet/:id", db.editPet);
 router.delete("/api/pet/:id", db.deletePet);
 router.post("/api/createRecord", db.createRecord);
 router.get("/api/categories", db.getCategories);
-// router.get("/api/getCurrUser", db.userAuthStatus);
+router.get("/api/records", db.getRecords);
 router.post("/api/signup", db.createUser);
 router.post("/api/login", db.authenticate);
+
+router.get("/api/seed", db.seedDB);
 
 export default router;

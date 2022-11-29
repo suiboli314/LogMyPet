@@ -8,8 +8,8 @@
 }
 
 .log-section-item-pic {
-  width: 32px;
-  height: 32px;
+  width: 6vw;
+  height: 6vw;
   border-radius: 5px;
   margin-right: 20px;
 }
@@ -21,4 +21,10 @@
 .log-section-item-anchor {
   margin-left: auto;
   cursor: pointer;
+}
+
+.log-section-text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }

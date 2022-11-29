@@ -1,8 +1,6 @@
 import { MongoClient, ObjectId } from "mongodb";
 import config from "../config.js";
-// import passport from "passport";
-// import LocalStrategy from "passport-local";
-
+import { faker } from "@faker-js/faker";
 // const mongoURL = config.MONGO_URL || "mongodb://localhost:27017";
 const mongoURL =
   config.MONGO_URL ||
@@ -13,44 +11,6 @@ const USER_COLLECTION_NAME = "users";
 const RECORD_COLLECTION_NAME = "records";
 const CATEGORY_COLLECTION_NAME = "categories";
 const PAGE_SIZE = 20;
-
-// const strategy = new LocalStrategy(async function verify(
-//   username,
-//   password,
-//   cb
-// ) {
-//   let client = new MongoClient(mongoURL);
-
-//   const result = await client
-//     .db(DB_NAME)
-//     .collection(USER_COLLECTION_NAME)
-//     .find({ username: username })
-//     .toArray();
-
-//   const user = result[0];
-//   if (!user) return cb(null, false);
-//   user.id = result[0]._id.toString();
-
-//   if (password == result[0].password) {
-//     return cb(null, user);
-//   } else {
-//     return cb(null, false);
-//   }
-// });
-
-// passport.use(strategy);
-
-// passport.serializeUser(function (user, cb) {
-//   process.nextTick(function () {
-//     cb(null, { id: user.id, username: user.username });
-//   });
-// });
-
-// passport.deserializeUser(function (user, cb) {
-//   process.nextTick(function () {
-//     return cb(null, user);
-//   });
-// });
 
 const getPets = async (req, res) => {
   let client;
@@ -238,6 +198,30 @@ const createRecord = async (req, res) => {
   }
 };
 
+const getRecords = async (req, res) => {
+  let client;
+  let page = req.query.page || 0;
+  console.log(req.query);
+
+  try {
+    client = new MongoClient(mongoURL);
+    const result = await client
+      .db(DB_NAME)
+      .collection(RECORD_COLLECTION_NAME)
+      .find({})
+      .skip(PAGE_SIZE * page)
+      .limit(PAGE_SIZE)
+      .toArray();
+    console.log(
+      `Page ${page} of pets are retrieved. Example record[0]: ${result[0]}`
+    );
+    res.json(result);
+  } catch (err) {
+    console.log(`Error occurred while getting record: ${err.message}`);
+    res.json({ status: 500 });
+  }
+};
+
 const getCategories = async (req, res) => {
   let client;
 
@@ -255,6 +239,63 @@ const getCategories = async (req, res) => {
   }
 };
 
+function randomIntFromInterval(min, max) {
+  // min and max included
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+const seedDB = async () => {
+  let client;
+
+  try {
+    client = new MongoClient(mongoURL);
+    const collection = client.db(DB_NAME).collection(RECORD_COLLECTION_NAME);
+    console.log("Connected correctly to server");
+
+    // The drop() command destroys all data from a collection.
+    // Make sure you run it against proper database and collection.
+    // collection.drop();
+
+    // make a bunch of time series data
+    let records = [];
+    let categoryIds = [
+      "638409972cee931320d80a80",
+      "63840a0d2cee931320d80a81",
+      "63840a712cee931320d80a82",
+      "63840ad02cee931320d80a83",
+    ];
+    let names = ["Eating", "Drinking", "Poop", "Pee"];
+    let imgUrls = [
+      "https://assets.moveshanghai.com/lmp_09.png",
+      "https://assets.moveshanghai.com/lmp_06.png",
+      "https://assets.moveshanghai.com/lmp_08.png",
+      "https://assets.moveshanghai.com/lmp_07.png",
+    ];
+
+    for (let i = 0; i < 1200; i++) {
+      const rdInt = randomIntFromInterval(0, 3);
+      console.log(categoryIds[rdInt]);
+      let record = {
+        timestamp_day: faker.date.past(),
+        category: {
+          id: categoryIds[rdInt],
+          name: names[rdInt],
+          imgUrl: imgUrls[rdInt],
+        },
+        about: faker.lorem.paragraph(),
+      };
+
+      records.push(record);
+    }
+    collection.insertMany(records);
+
+    console.log("Database seeded! :)");
+    client.close();
+  } catch (err) {
+    console.log(err.stack);
+  }
+};
+
 export default {
   getPets,
   getOnePet,
@@ -264,6 +305,8 @@ export default {
   userAuthStatus,
   createUser,
   createRecord,
+  getRecords,
   getCategories,
   authenticate,
+  seedDB,
 };

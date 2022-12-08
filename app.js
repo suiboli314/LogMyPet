@@ -29,17 +29,13 @@ app.use(
   session({
     secret: "test",
     resave: false,
-    saveUninitialized: true,
-    cookie: {
-      secure: true,
-      maxAge: 3000000 * 60,
-    },
+    saveUninitialized: false,
+    cookie: { secure: false },
   })
 );
 
 app.use(passport.initialize());
 app.use(passport.session());
-
 
 app.use("/", indexRouter);
 app.get("*", (req, res) => {

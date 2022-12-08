@@ -2,7 +2,9 @@ import { MongoClient, ObjectId } from "mongodb";
 import config from "../config.js";
 import { faker } from "@faker-js/faker";
 // const mongoURL = config.MONGO_URL || "mongodb://localhost:27017";
-const mongoURL = config.MONGO_URL || "mongodb+srv://dylantse:IHcuwrJ9F648zvYH@cluster0.vrljs4f.mongodb.net/?retryWrites=true&w=majority";
+const mongoURL =
+  config.MONGO_URL ||
+  "mongodb+srv://dylantse:IHcuwrJ9F648zvYH@cluster0.vrljs4f.mongodb.net/?retryWrites=true&w=majority";
 const DB_NAME = "logMyPetDB";
 const PET_COLLECTION_NAME = "pets";
 const USER_COLLECTION_NAME = "users";
@@ -138,9 +140,10 @@ const authenticate = async (req, res) => {
       .collection(USER_COLLECTION_NAME)
       .find({ username: user.username })
       .toArray();
-
+    console.log(0, user);
     if (user.password == result[0].password) {
-      req.session.user = { user: user.username };
+      console.log(1, user);
+      // req.session.user = { user: user.username };
       res.json(result);
     }
   } catch (e) {

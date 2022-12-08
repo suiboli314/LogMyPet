@@ -142,7 +142,7 @@ const authenticate = async (req, res) => {
       .toArray();
     console.log(0, user);
     if (user.password == result[0].password) {
-      console.log(1, user);
+      console.log(1, req.session);
       // req.session.user = { user: user.username };
       res.json(result);
     }
